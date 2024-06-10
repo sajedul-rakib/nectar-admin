@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "452236619238",
+    "project_id": "ecommerce-8ea16",
+    "storage_bucket": "ecommerce-8ea16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452236619238:android:1567d809e239a7441e3a27",
+        "android_client_info": {
+          "package_name": "com.example.admin_panel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNXajb8R2tByCB0GACd7_5kXIL-BnFgd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452236619238:android:6755571579a9e0a21e3a27",
+        "android_client_info": {
+          "package_name": "com.example.nectar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNXajb8R2tByCB0GACd7_5kXIL-BnFgd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452236619238:android:a9860b4f7f2a07fa1e3a27",
+        "android_client_info": {
+          "package_name": "example.com.admin_panel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNXajb8R2tByCB0GACd7_5kXIL-BnFgd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
