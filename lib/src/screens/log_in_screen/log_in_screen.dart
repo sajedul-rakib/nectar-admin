@@ -125,17 +125,18 @@ class _LogInScreenState extends State<LogInScreen> {
             },
             listener: (context, state) {
               if (state is LogInSuccess) {
-                const CustomSnackBar(
+                snackBar(
+                    title: "Success",
+                    message: "Log in successfully",
                     contentType: ContentType.success,
-                    label: "Log in Success",
-                    message: "You are log in suceessfully");
+                    context: context);
                 context.goNamed(RouteName.HOMESCREEN);
               } else if (state is LogInFailure) {
-                CustomSnackBar(
-                  contentType: ContentType.failure,
-                  label: "Log in Failed",
-                  message: "${state.message}",
-                );
+                snackBar(
+                    title: "Log in failed",
+                    message: state.message,
+                    contentType: ContentType.failure,
+                    context: context);
               }
             },
           ),

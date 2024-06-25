@@ -1,6 +1,8 @@
 import 'package:admin_panel/controller/controller.dart';
 import 'package:admin_panel/src/bloc/blocs.dart';
+import 'package:admin_panel/src/bloc/order_management_bloc/order_management_bloc.dart';
 import 'package:admin_panel/src/routes/route.dart';
+import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,11 +38,20 @@ class MainApp extends StatelessWidget {
                 create: (context) => LoginBlocBloc(userRepo: userRepo)),
             BlocProvider(
                 create: (context) =>
-                    ProductUploadBloc(productRepo: productRepo))
+                    ProductUploadBloc(productRepo: productRepo)),
+            BlocProvider(
+                create: (context) =>
+                    OrderManagementBloc(productRepo: productRepo))
           ],
           child: ScreenUtilInit(
             designSize: const Size(360, 690),
             child: MaterialApp.router(
+              theme: ThemeData(
+                  appBarTheme: const AppBarTheme(
+                      titleTextStyle:
+                          TextStyle(color: AppColors.whiteColor, fontSize: 20),
+                      backgroundColor: AppColors.successGreen,
+                      iconTheme: IconThemeData(color: AppColors.whiteColor))),
               routerConfig: AppRoute.router,
               debugShowCheckedModeBanner: false,
             ),

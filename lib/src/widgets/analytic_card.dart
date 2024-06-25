@@ -15,12 +15,16 @@ class AnalyticCardView extends StatelessWidget {
         shrinkWrap: true,
         itemCount: analyticData.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: !AppResponsive.isDesktop(context) ? 2 : 4,
+            crossAxisCount: !AppResponsive.isDesktop(context)
+                ? AppResponsive.isTablet(context)
+                    ? 2
+                    : 1
+                : 4,
             childAspectRatio:
-                !AppResponsive.isDesktop(context) ? 1.4 / .5 : 1 / .5,
+                !AppResponsive.isDesktop(context) ? 1.4 / .6 : 1 / .7,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0),
-        itemBuilder: (context, index) => AnalyticInfoCard(
+        itemBuilder: (_, index) => AnalyticInfoCard(
               analyticData: analyticData[index],
             ));
   }
@@ -34,46 +38,46 @@ class AnalyticInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: !AppResponsive.isDesktop(context) ? 200 : 100,
-      height: 50,
       decoration: BoxDecoration(
-          color: AppColors.successGreen.withOpacity(.2),
+          color: AppColors.shadowColor,
           borderRadius: BorderRadius.circular(10)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 10.0, right: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      analyticData.value,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.successGreen),
-                    ),
-                    Text(
-                      analyticData.title,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.successGreen),
-                    )
-                  ],
-                ),
                 Container(
                   padding: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.successGreen.withOpacity(.4)),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.whiteColor,
+                  ),
                   child: (Icon(
                     analyticData.iconData,
-                    color: AppColors.successGreen,
+                    color: AppColors.blackColor,
+                    size: 30,
                   )),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  analyticData.value,
+                  style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blackColor),
+                ),
+                Text(
+                  analyticData.title,
+                  style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blackColor),
                 )
               ],
             ),
