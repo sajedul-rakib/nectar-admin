@@ -25,7 +25,7 @@ class AnalyticData {
       value: "73",
     ),
     AnalyticData(
-      iconData: CupertinoIcons.money_dollar_circle,
+      iconData: CupertinoIcons.person_2_fill,
       title: "Customers",
       value: "732",
     ),

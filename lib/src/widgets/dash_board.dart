@@ -13,7 +13,6 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Padding(
@@ -67,19 +66,17 @@ class DashBoard extends StatelessWidget {
             ],
           ),
         ),
-        SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: AnalyticCardView(
-                  analyticData: AnalyticData.data,
-                ),
-              )
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: AnalyticCardView(
+                analyticData: AnalyticData.data,
+              ),
+            )
+          ],
         )
       ],
     );

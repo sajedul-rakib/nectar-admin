@@ -86,6 +86,7 @@ void snackBar(
     required ContentType contentType,
     required BuildContext context}) {
   final snackbar = SnackBar(
+    duration: const Duration(seconds: 2),
     elevation: 0,
     width: !AppResponsive.isMobile(context) ? 500 : null,
     behavior: SnackBarBehavior.floating,
@@ -97,5 +98,7 @@ void snackBar(
     ),
   );
 
-  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+  ScaffoldMessenger.of(context).showSnackBar(
+    snackbar,
+  );
 }

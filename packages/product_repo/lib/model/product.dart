@@ -2,7 +2,7 @@ class Product {
   String? id;
   String? productName;
   String? productDescription;
-  double? productPrice;
+  num? productPrice;
   num? discount;
   num? productStock;
   String? productUnit;
@@ -35,7 +35,7 @@ class Product {
     id = data["id"] as String;
     productName = data["productName"] as String;
     productDescription = data["productDescription"] as String;
-    productPrice = data["productPrice"] as double;
+    productPrice = data["productPrice"] as num;
     discount = data["discount"] as num;
     productStock = data["productStock"] as num;
     productUnit = data["productUnit"] as String;
@@ -47,22 +47,6 @@ class Product {
     brandName = data["brandName"] as String;
     rating = data["rating"] as num;
   }
-
-  static Product empty = Product(
-      id: '',
-      productName: '',
-      productDescription: '',
-      productPrice: 0,
-      discount: 0,
-      productStock: 0,
-      productUnit: '',
-      nutrition: "",
-      productCategory: "",
-      productImages: [],
-      productShowImage: "",
-      tag: "",
-      brandName: "",
-      rating: 0);
 
   // dart to json
   Map<String, dynamic> toJson() {

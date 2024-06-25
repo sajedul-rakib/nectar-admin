@@ -1,7 +1,9 @@
+import 'package:admin_panel/src/bloc/log_in_bloc/login_bloc_bloc.dart';
 import 'package:admin_panel/src/routes/route.dart';
 import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/assets/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomMenuBar extends StatelessWidget {
@@ -15,7 +17,7 @@ class CustomMenuBar extends StatelessWidget {
         borderRadius: BorderRadius.zero,
       ),
       elevation: 0.0,
-      backgroundColor: AppColors.primaryBackgroundColor,
+      backgroundColor: AppColors.successGreen,
       child: Column(
         children: [
           const SizedBox(
@@ -29,10 +31,15 @@ class CustomMenuBar extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
+          const Divider(
+            height: 2,
+          ),
           DrawerListTile(
             iconData: Icons.dashboard,
             title: "Dashboard",
-            onTap: () {},
+            onTap: () {
+              context.go(RouteName.HOMESCREEN);
+            },
           ),
           DrawerListTile(
             iconData: Icons.list_alt,
@@ -69,7 +76,14 @@ class CustomMenuBar extends StatelessWidget {
             iconData: Icons.question_mark_rounded,
             title: "Help",
             onTap: () {},
-          )
+          ),
+          DrawerListTile(
+              iconData: Icons.logout,
+              title: "Log out",
+              onTap: () {
+                context.read<LoginBlocBloc>().add(const LogOutRequired());
+                context.go(RouteName.LOGINSCREEN);
+              })
         ],
       ),
     );

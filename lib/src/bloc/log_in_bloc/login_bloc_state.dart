@@ -13,8 +13,8 @@ class LogInSuccess extends LoginBlocState {}
 class LogInProcess extends LoginBlocState {}
 
 class LogInFailure extends LoginBlocState {
-  final String? message;
-  LogInFailure({this.message});
+  final String message;
+  LogInFailure({required this.message});
 }
 
 class LogOutProcess extends LoginBlocState {}

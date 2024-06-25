@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:product_repo/model/order_data_model.dart';
 import 'package:product_repo/model/product.dart';
 import 'package:product_repo/product_repository.dart';
 
@@ -12,6 +13,11 @@ abstract class ProductRepo {
 
   //get all uploaded product
   Future<List<Product>> getAllProduct();
+
+  //update product data
   Future<Product> updateProductData(
       {required String productId, required Product updatedProductData});
+
+  //get order data
+  Future<List<OrderDataModel>> getOrderData();
 }

@@ -6,7 +6,7 @@ class AppButton extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.buttonTitle,
-    this.buttonBackgroundColor = AppColors.primaryBackgroundColor,
+    this.buttonBackgroundColor = AppColors.successGreen,
   });
 
   final Function()? onPressed;

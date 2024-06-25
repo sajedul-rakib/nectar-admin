@@ -1,5 +1,4 @@
 import 'package:admin_panel/controller/controller.dart';
-import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/responsive/responsive.dart';
 import 'package:admin_panel/src/widgets/dash_board.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ class HomeScreen extends StatelessWidget {
     double height = size.height;
     return Scaffold(
       key: context.read<DrawerMenuController>().scaffoldKey,
-      backgroundColor: AppColors.whiteColor,
       drawer: const CustomMenuBar(),
       body: SafeArea(
         child: Row(
@@ -32,7 +30,7 @@ class HomeScreen extends StatelessWidget {
               child: SizedBox(
                 width: width,
                 height: height,
-                child: const DashBoard(),
+                child: const SingleChildScrollView(child: DashBoard()),
               ),
             )
           ],

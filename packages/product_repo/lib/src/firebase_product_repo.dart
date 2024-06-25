@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:product_repo/model/order_data_model.dart';
 import 'package:product_repo/model/product.dart';
 import 'package:product_repo/src/product_repo.dart';
 
@@ -21,8 +22,10 @@ class FirebaseProductRepo implements ProductRepo {
 
     if (kIsWeb) {
       for (PlatformFile img in images) {
-        Reference childDirectory =
-            rootDirectory.child("products/${img.xFile.name}");
+        final ext = img.name.split(".").last;
+        final uniqueName =
+            "product_img-${DateTime.now().microsecondsSinceEpoch}.$ext";
+        Reference childDirectory = rootDirectory.child("products/$uniqueName");
         final metaData = SettableMetadata(
             contentType: "image/jpeg",
             customMetadata: {'picked-file-path': img.xFile.path});
@@ -38,8 +41,11 @@ class FirebaseProductRepo implements ProductRepo {
     } else {
       try {
         for (PlatformFile img in images) {
+          final ext = img.name.split(".").last;
+          final uniqueName =
+              "product_img-${DateTime.now().microsecondsSinceEpoch}.$ext";
           Reference childDirectory =
-              rootDirectory.child("products/${img.xFile.name}");
+              rootDirectory.child("products/$uniqueName");
           uploadTask = childDirectory.putFile(File(img.xFile.path));
           final task = await uploadTask.whenComplete(() => null);
 
@@ -79,7 +85,7 @@ class FirebaseProductRepo implements ProductRepo {
     }
   }
 
-  //get all uploaded prodcut
+  //get all uploaded product
   @override
   Future<List<Product>> getAllProduct() async {
     List<Product> allProduct = [];
@@ -117,6 +123,23 @@ class FirebaseProductRepo implements ProductRepo {
           .doc(productDocument)
           .get();
       return Product.fromJson(updatedProduct.data()!);
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<OrderDataModel>> getOrderData() async {
+    List<OrderDataModel> orders = [];
+    try {
+      final orderData = await _firebaseFirestore.collection("order").get();
+
+      for (var order in orderData.docs) {
+        orders.add(OrderDataModel.fromJson(order.data()));
+      }
+
+      return orders;
     } catch (e) {
       log(e.toString());
       rethrow;
