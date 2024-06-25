@@ -86,16 +86,47 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        'Order Id: ',
-                                        style: TextStyle(fontSize: 18),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Order Id: ',
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          Text(
+                                            "#${orders[index].orderId}",
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "#${orders[index].orderId}",
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                      Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.successGreen
+                                                .withOpacity(.6),
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              'Total pay: ',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: AppColors.whiteColor),
+                                            ),
+                                            Text(
+                                              "\$${orders[index].totalPrice}",
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.whiteColor),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

@@ -46,10 +46,22 @@ class AppFormField extends StatelessWidget {
           label: Text("$labelText"),
           fillColor: AppColors.whiteColor,
           filled: true,
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide:
+                  const BorderSide(width: 2.0, color: AppColors.successGreen)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide:
+                  const BorderSide(width: 2.0, color: AppColors.failureRed)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide:
+                  const BorderSide(width: 2.0, color: AppColors.successGreen)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide:
-                  const BorderSide(width: 1.0, color: AppColors.blackColor))),
+                  const BorderSide(width: 2.0, color: AppColors.successGreen))),
     );
   }
 }

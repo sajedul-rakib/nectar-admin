@@ -2,6 +2,7 @@ import 'package:admin_panel/src/bloc/log_in_bloc/login_bloc_bloc.dart';
 import 'package:admin_panel/src/routes/route.dart';
 import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/assets/assets_manager.dart';
+import 'package:admin_panel/src/widgets/app_button.dart';
 import 'package:admin_panel/src/widgets/app_form_field.dart';
 import 'package:admin_panel/src/widgets/circular_progress_indicator.dart';
 import 'package:admin_panel/src/widgets/snack_bar.dart';
@@ -33,16 +34,23 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   @override
+  void dispose() {
+    _emailETController.dispose();
+    _passwordETController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(10),
-          width: 300,
-          height: 300,
+          width: 350,
+          height: 320,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppColors.primaryBackgroundColor.withOpacity(.3)),
+              color: AppColors.shadowColor),
           child: BlocConsumer<LoginBlocBloc, LoginBlocState>(
             builder: (context, state) {
               if (state is LogInProcess) {
@@ -57,8 +65,8 @@ class _LogInScreenState extends State<LogInScreen> {
                     Center(
                       child: Image.asset(
                         AssetsManager.logoImage,
-                        color: AppColors.primaryBackgroundColor,
-                        width: 150,
+                        color: AppColors.successGreen,
+                        width: 200,
                       ),
                     ),
                     const SizedBox(
@@ -105,20 +113,18 @@ class _LogInScreenState extends State<LogInScreen> {
                       height: 20,
                     ),
                     SizedBox(
-                        width: 200,
-                        height: 40,
-                        child: ElevatedButton(
-                            style: const ButtonStyle(
-                                backgroundColor: WidgetStatePropertyAll(
-                                    AppColors.primaryBackgroundColor)),
-                            onPressed: () {
-                              if (_formKey.currentState?.validate() ?? true) {
-                                context.read<LoginBlocBloc>().add(LogInRequired(
-                                    email: _emailETController.text.trim(),
-                                    password: _passwordETController.text));
-                              }
-                            },
-                            child: const Text("Log In")))
+                        width: 350,
+                        height: 50,
+                        child: AppButton(
+                          buttonTitle: "Log In",
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() ?? true) {
+                              context.read<LoginBlocBloc>().add(LogInRequired(
+                                  email: _emailETController.text.trim(),
+                                  password: _passwordETController.text));
+                            }
+                          },
+                        ))
                   ],
                 ),
               );

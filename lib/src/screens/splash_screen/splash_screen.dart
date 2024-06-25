@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryBackgroundColor,
+      backgroundColor: AppColors.successGreen,
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           log(state.status.toString());
