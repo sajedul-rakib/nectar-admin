@@ -6,6 +6,7 @@ import 'package:admin_panel/src/widgets/app_button.dart';
 import 'package:admin_panel/src/widgets/circular_progress_indicator.dart';
 import 'package:admin_panel/src/widgets/menu.dart';
 import 'package:admin_panel/src/widgets/snack_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_repo/model/order_data_model.dart';
@@ -32,9 +33,10 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       key: context.read<DrawerMenuController>().scaffoldKey,
-      drawer: const CustomMenuBar(),
+      drawer: kIsWeb ? const CustomMenuBar() : null,
       appBar: !AppResponsive.isDesktop(context)
           ? AppBar(
+              centerTitle: true,
               title: const Text(
                 "Manage Orders",
                 style: TextStyle(color: AppColors.whiteColor),
@@ -86,16 +88,47 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        'Order Id: ',
-                                        style: TextStyle(fontSize: 18),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Order Id: ',
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                          Text(
+                                            "#${orders[index].orderId}",
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "#${orders[index].orderId}",
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                      Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.successGreen
+                                                .withOpacity(.6),
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Row(
+                                          children: [
+                                            const Text(
+                                              'Total pay: ',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: AppColors.whiteColor),
+                                            ),
+                                            Text(
+                                              "\$${orders[index].totalPrice}",
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.whiteColor),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

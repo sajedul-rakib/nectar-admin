@@ -81,8 +81,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     _productNutritionTEController.text = _product.nutrition ?? "";
     selectedCategory = _product.productCategory ?? "";
     images = _product.productImages ?? [];
-
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _productNameTEController.dispose();
+    _productDescriptionTEController.dispose();
+    _productPriceTEController.dispose();
+    _productDiscountPercentageTEController.dispose();
+    _productStockTEController.dispose();
+    _productNutritionTEController.dispose();
+    super.dispose();
   }
 
   @override

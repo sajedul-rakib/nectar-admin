@@ -2,6 +2,7 @@ import 'package:admin_panel/src/bloc/log_in_bloc/login_bloc_bloc.dart';
 import 'package:admin_panel/src/routes/route.dart';
 import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/assets/assets_manager.dart';
+import 'package:admin_panel/src/widgets/app_button.dart';
 import 'package:admin_panel/src/widgets/app_form_field.dart';
 import 'package:admin_panel/src/widgets/circular_progress_indicator.dart';
 import 'package:admin_panel/src/widgets/snack_bar.dart';
@@ -33,84 +34,91 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   @override
+  void dispose() {
+    _emailETController.dispose();
+    _passwordETController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          width: 300,
-          height: 300,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.primaryBackgroundColor.withOpacity(.3)),
-          child: BlocConsumer<LoginBlocBloc, LoginBlocState>(
-            builder: (context, state) {
-              if (state is LogInProcess) {
-                return const CustomProgressIndicator();
-              }
-              return Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Center(
-                      child: Image.asset(
-                        AssetsManager.logoImage,
-                        color: AppColors.primaryBackgroundColor,
-                        width: 150,
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            width: 350,
+            height: 320,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.shadowColor),
+            child: BlocConsumer<LoginBlocBloc, LoginBlocState>(
+              builder: (context, state) {
+                if (state is LogInProcess) {
+                  return const CustomProgressIndicator();
+                }
+                return Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          AssetsManager.logoImage,
+                          color: AppColors.successGreen,
+                          width: 200,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    AppFormField(
-                      labelText: "Email",
-                      hintText: "Enter your email",
-                      textInputType: TextInputType.emailAddress,
-                      prefixIcon: CupertinoIcons.mail,
-                      textEditingController: _emailETController,
-                      validator: (String? value) {
-                        if (value!.isNotEmpty) {
-                          return null;
-                        } else {
-                          return "Enter your email";
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    AppFormField(
-                      labelText: "Password",
-                      hintText: "Enter your password",
-                      prefixIcon: CupertinoIcons.textformat_abc_dottedunderline,
-                      suffixIcon: InkWell(
-                        onTap: changeIcon,
-                        child: Icon(isSecure
-                            ? CupertinoIcons.eye_slash
-                            : CupertinoIcons.eye),
+                      const SizedBox(
+                        height: 30,
                       ),
-                      isSecure: isSecure,
-                      textEditingController: _passwordETController,
-                      validator: (String? value) {
-                        if (value!.isNotEmpty) {
-                          return null;
-                        } else {
-                          return "Enter your password";
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                        width: 200,
-                        height: 40,
-                        child: ElevatedButton(
-                            style: const ButtonStyle(
-                                backgroundColor: WidgetStatePropertyAll(
-                                    AppColors.primaryBackgroundColor)),
+                      AppFormField(
+                        labelText: "Email",
+                        hintText: "Enter your email",
+                        textInputType: TextInputType.emailAddress,
+                        prefixIcon: CupertinoIcons.mail,
+                        textEditingController: _emailETController,
+                        validator: (String? value) {
+                          if (value!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return "Enter your email";
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      AppFormField(
+                        labelText: "Password",
+                        hintText: "Enter your password",
+                        prefixIcon:
+                            CupertinoIcons.textformat_abc_dottedunderline,
+                        suffixIcon: InkWell(
+                          onTap: changeIcon,
+                          child: Icon(isSecure
+                              ? CupertinoIcons.eye_slash
+                              : CupertinoIcons.eye),
+                        ),
+                        isSecure: isSecure,
+                        textEditingController: _passwordETController,
+                        validator: (String? value) {
+                          if (value!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return "Enter your password";
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: AppButton(
+                            buttonTitle: "Log In",
                             onPressed: () {
                               if (_formKey.currentState?.validate() ?? true) {
                                 context.read<LoginBlocBloc>().add(LogInRequired(
@@ -118,27 +126,28 @@ class _LogInScreenState extends State<LogInScreen> {
                                     password: _passwordETController.text));
                               }
                             },
-                            child: const Text("Log In")))
-                  ],
-                ),
-              );
-            },
-            listener: (context, state) {
-              if (state is LogInSuccess) {
-                snackBar(
-                    title: "Success",
-                    message: "Log in successfully",
-                    contentType: ContentType.success,
-                    context: context);
-                context.goNamed(RouteName.HOMESCREEN);
-              } else if (state is LogInFailure) {
-                snackBar(
-                    title: "Log in failed",
-                    message: state.message,
-                    contentType: ContentType.failure,
-                    context: context);
-              }
-            },
+                          ))
+                    ],
+                  ),
+                );
+              },
+              listener: (context, state) {
+                if (state is LogInSuccess) {
+                  snackBar(
+                      title: "Success",
+                      message: "Log in successfully",
+                      contentType: ContentType.success,
+                      context: context);
+                  context.goNamed(RouteName.HOMESCREEN);
+                } else if (state is LogInFailure) {
+                  snackBar(
+                      title: "Log in failed",
+                      message: state.message,
+                      contentType: ContentType.failure,
+                      context: context);
+                }
+              },
+            ),
           ),
         ),
       ),

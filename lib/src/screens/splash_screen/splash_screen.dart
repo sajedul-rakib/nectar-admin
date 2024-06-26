@@ -4,6 +4,7 @@ import 'package:admin_panel/src/bloc/blocs.dart';
 import 'package:admin_panel/src/routes/route.dart';
 import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/assets/assets_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryBackgroundColor,
+      backgroundColor: AppColors.successGreen,
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
           log(state.status.toString());
@@ -23,7 +24,11 @@ class SplashScreen extends StatelessWidget {
               context.goNamed(RouteName.LOGINSCREEN);
             });
           } else {
-            context.goNamed(RouteName.HOMESCREEN);
+            if (kIsWeb) {
+              context.goNamed(RouteName.HOMESCREEN);
+            } else {
+              context.go(RouteName.BOTTOMNAVIGATIONSCREEN);
+            }
           }
         },
         child: Center(

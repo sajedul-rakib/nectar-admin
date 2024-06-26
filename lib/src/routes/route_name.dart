@@ -9,4 +9,5 @@ class RouteName {
   static const String HELPSCREEN = '/help-screen';
   static const String PRODUCTDETAILSCREEN = '/product-detail-screen';
   static const String ORDERMANAGEMENTSCREEN = '/order-management-screen';
+  static const String BOTTOMNAVIGATIONSCREEN = '/bottom-navigation-screen';
 }

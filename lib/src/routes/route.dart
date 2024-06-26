@@ -1,5 +1,6 @@
 import 'package:admin_panel/src/screens/add_new_product_screen/add_new_product_screen.dart';
 import 'package:admin_panel/src/screens/all_product_view/all_product_view_screen.dart';
+import 'package:admin_panel/src/screens/bottom_navigation_bar/bottom_navigation_bar_screen.dart';
 import 'package:admin_panel/src/screens/home_screen/home_screen.dart';
 import 'package:admin_panel/src/screens/log_in_screen/log_in_screen.dart';
 import 'package:admin_panel/src/screens/order_management_screen/order_management_screen.dart';
@@ -45,6 +46,12 @@ class AppRoute {
         name: RouteName.ALLPRODUCTSCREEN,
         pageBuilder: (context, build) =>
             const MaterialPage(child: AllProductViewScreen())),
+
+    GoRoute(
+        path: RouteName.BOTTOMNAVIGATIONSCREEN,
+        name: RouteName.BOTTOMNAVIGATIONSCREEN,
+        pageBuilder: (context, build) =>
+            const MaterialPage(child: BottomNavigationBarScreen())),
 
     GoRoute(
         path: RouteName.PRODUCTDETAILSCREEN,
