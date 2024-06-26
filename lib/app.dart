@@ -47,6 +47,12 @@ class MainApp extends StatelessWidget {
             designSize: const Size(360, 690),
             child: MaterialApp.router(
               theme: ThemeData(
+                  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                      type: BottomNavigationBarType.fixed,
+                      elevation: 0,
+                      unselectedItemColor: AppColors.whiteColor,
+                      selectedItemColor: AppColors.shadowColor,
+                      backgroundColor: AppColors.successGreen),
                   appBarTheme: const AppBarTheme(
                       titleTextStyle:
                           TextStyle(color: AppColors.whiteColor, fontSize: 20),

@@ -88,11 +88,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       key: context.read<DrawerMenuController>().scaffoldKey,
       appBar: !AppResponsive.isDesktop(context)
           ? AppBar(
+              centerTitle: true,
               backgroundColor: AppColors.successGreen,
               title: const Text("Add new product"),
             )
           : null,
-      drawer: const CustomMenuBar(),
+      drawer: kIsWeb ? const CustomMenuBar() : null,
       body: SafeArea(
         child: Row(
           children: [

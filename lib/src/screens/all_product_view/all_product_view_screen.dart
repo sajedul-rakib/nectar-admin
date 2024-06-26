@@ -5,6 +5,7 @@ import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/responsive/responsive.dart';
 import 'package:admin_panel/src/widgets/circular_progress_indicator.dart';
 import 'package:admin_panel/src/widgets/menu.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -36,9 +37,10 @@ class _AllProductViewScreenState extends State<AllProductViewScreen> {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       key: context.read<DrawerMenuController>().scaffoldKey,
-      drawer: const CustomMenuBar(),
+      drawer: kIsWeb ? const CustomMenuBar() : null,
       appBar: !AppResponsive.isDesktop(context)
           ? AppBar(
+              centerTitle: true,
               backgroundColor: AppColors.successGreen,
               title: const Text(
                 "All Product",

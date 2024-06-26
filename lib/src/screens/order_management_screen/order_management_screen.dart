@@ -6,6 +6,7 @@ import 'package:admin_panel/src/widgets/app_button.dart';
 import 'package:admin_panel/src/widgets/circular_progress_indicator.dart';
 import 'package:admin_panel/src/widgets/menu.dart';
 import 'package:admin_panel/src/widgets/snack_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_repo/model/order_data_model.dart';
@@ -32,9 +33,10 @@ class _OrderManagementScreenState extends State<OrderManagementScreen> {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       key: context.read<DrawerMenuController>().scaffoldKey,
-      drawer: const CustomMenuBar(),
+      drawer: kIsWeb ? const CustomMenuBar() : null,
       appBar: !AppResponsive.isDesktop(context)
           ? AppBar(
+              centerTitle: true,
               title: const Text(
                 "Manage Orders",
                 style: TextStyle(color: AppColors.whiteColor),

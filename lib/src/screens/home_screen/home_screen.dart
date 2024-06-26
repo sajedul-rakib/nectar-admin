@@ -1,6 +1,8 @@
 import 'package:admin_panel/controller/controller.dart';
+import 'package:admin_panel/src/utils/app_colors/colors.dart';
 import 'package:admin_panel/src/utils/responsive/responsive.dart';
 import 'package:admin_panel/src/widgets/dash_board.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +17,16 @@ class HomeScreen extends StatelessWidget {
     double width = size.width;
     double height = size.height;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Image.asset(
+          'assets/images/logo.png',
+          width: 200,
+          color: AppColors.whiteColor,
+        ),
+      ),
       key: context.read<DrawerMenuController>().scaffoldKey,
-      drawer: const CustomMenuBar(),
+      drawer: kIsWeb ? const CustomMenuBar() : null,
       body: SafeArea(
         child: Row(
           children: [
